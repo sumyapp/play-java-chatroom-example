@@ -5,6 +5,8 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /chat                       controllers.HomeController.chat
+GET     /user                       controllers.UsersController.show
+PUT     /user                       controllers.UsersController.update
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
