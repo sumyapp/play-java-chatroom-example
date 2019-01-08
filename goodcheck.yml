@@ -11,9 +11,7 @@ rules:
       - User user = this.getCurrentUser();
       - User user = this.getCurrentUserOpt();
   - id: com.sider.evolution
-    pattern: 
-      regexp: .+
-      multiline: true
+    pattern: "--- !Ups"
     message: |
       Read evolution manual before deploy!
 
