@@ -10,3 +10,31 @@ rules:
     pass:
       - User user = this.getCurrentUser();
       - User user = this.getCurrentUserOpt();
+  - id: com.sider.evolution
+    pattern: 
+      regexp: .+
+      multiline: true
+    message: |
+      Read evolution manual before deploy!
+
+      Your PR contains evolutions.
+      Please read the manual before deploying the new version!
+
+      * Evolution guide: https://github.com/sider-demo/guides/evolutions.md
+    glob:
+      - "conf/evolutions/*/*.sql"
+  - id: com.sider.alter_table
+    pattern: 
+      token: ALTER TABLE
+    message: |
+      Make sure ALTER TABLE can be done online, or schedule a maintenance
+
+      Read the MySQL documentat to check if the ALTER TABLE can be applied online.
+      If the ALTER TABLE cannot be applied online, you should schedule a maintenance.
+
+      * https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl-operations.html
+    glob:
+      - "conf/evolutions/*/*.sql"
+    fail:
+      - |
+        ALTER TABLE User ADD avatorURL string;
