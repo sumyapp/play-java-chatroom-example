@@ -1,0 +1,12 @@
+rules:
+  - id: com.sider.currentUser
+    pattern: session.get("currentUserID")
+    message: |
+      Use getCurrentUser or getCurrentUserOpt if possible
+    glob: 
+      - "app/controllers/**/*.java"
+    fail:
+      - User user = request.session.get("currentUserID");
+    pass:
+      - User user = this.getCurrentUser();
+      - User user = this.getCurrentUserOpt();

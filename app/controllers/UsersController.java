@@ -6,10 +6,10 @@ import java.util.concurrent.CompletableFuture;
 
 import org.webjars.play.WebJarsUtil;
 
-public class UsersController extends Controller {
+public class UsersController extends ApplicationController {
     public Result show() {
         Http.Request request = request();
-        User user = User.fetch(request.session.get("currentUserID"));
+        User user = getCurrentUser();
         return Results.ok(views.html.index.render(url, user), null);
     }
 
@@ -17,7 +17,7 @@ public class UsersController extends Controller {
         Http.Request request = request();
         RequestBody body = request.body();
 
-        User user = User.fetch(request.session.get("currentUserID"));
+        User user = getCurrentUser();
         user.update(body);
         user.saveOrRaise();
 
